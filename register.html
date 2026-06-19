@@ -84,35 +84,53 @@
       // Собираем данные клиента из формы
       const client = {
         name: document.getElementById('name').value,
+        secondname: document.getElementById('secondname').value,
         phone: document.getElementById('phone').value,
         email: document.getElementById('email').value,
         password: document.getElementById('password').value
       };
 
-      /* ============================================================*/
-         try {
-           const response = await fetch("register.php", {
-             method: 'POST',
-             headers: { 'Content-Type': 'application/json' },
-             body: JSON.stringify(client)
-           });
-           const result = await response.json();
-           if (result.success) {
-             window.location.href = 'login.html';
-           } else {
-             msg.textContent = result.message || 'Ошибка регистрации';
-             msg.style.color = '#e10600';
-           }
-         } catch (err) {
-           msg.textContent = 'Ошибка соединения с сервером';
-           msg.style.color = '#e10600';
-         }
-         /*============================================================ */
+      try {
+        const response = await fetch("register.php", {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(client)
+        });
 
-      // Заглушка (демо без БД) — удалите, когда подключите свой сервер:
-      console.log('Новый клиент для записи в БД:', client);
-      msg.textContent = 'Демо: данные собраны. Подключите БД в коде (см. комментарий).';
-      msg.style.color = '#22b14c';
+        const text = await response.text();
+        console.log('register.php response status:', response.status, response.statusText);
+        console.log('register.php raw response:', text);
+
+        if (!response.ok) {
+          msg.textContent = `Сервер вернул ${response.status}`;
+          msg.style.color = '#e10600';
+          return;
+        }
+
+        let result;
+        try {
+          result = JSON.parse(text);
+        } catch (parseError) {
+          msg.textContent = 'Неверный ответ от сервера';
+          msg.style.color = '#e10600';
+          console.error('JSON parse error:', parseError, 'raw response:', text);
+          return;
+        }
+
+        if (result.success) {
+          window.location.href = 'login.html';
+        } else {
+          msg.textContent = result.message || 'Ошибка регистрации';
+          msg.style.color = '#e10600';
+          if (result.debug) {
+            console.log('server debug:', result.debug);
+          }
+        }
+      } catch (err) {
+        msg.textContent = 'Ошибка соединения с сервером';
+        msg.style.color = '#e10600';
+        console.error('Fetch error:', err);
+      }
     });
   </script>
 </body>

@@ -1,69 +1,91 @@
 <?php
-header("Content-Type: application/json");
 
 require_once "config.php";
 
-// Получаем JSON из fetch()
+header("Content-Type: application/json; charset=utf-8");
+
+// Получаем JSON
 $data = json_decode(file_get_contents("php://input"), true);
+
+if (!$data) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Данные не получены."
+    ]);
+    exit;
+}
 
 $name = trim($data["name"]);
 $secondname = trim($data["secondname"]);
 $phone = trim($data["phone"]);
 $email = trim($data["email"]);
-$password = $data["password"];
+$password = trim($data["password"]);
 
-// Проверяем заполнение
-if (empty($name) || empty($secondname) || empty($phone) || empty($email) || empty($password)) {
+if (
+    empty($name) ||
+    empty($secondname) ||
+    empty($phone) ||
+    empty($email) ||
+    empty($password)
+) {
+
     echo json_encode([
         "success" => false,
-        "message" => "Заполните все поля"
+        "message" => "Заполните все поля."
     ]);
+
     exit;
 }
 
-// Проверяем, существует ли пользователь
-$stmt = $conn->prepare("SELECT id FROM aregistr WHERE email = ?");
-$stmt->bind_param("s", $email);
-$stmt->execute();
-$result = $stmt->get_result();
+// Проверяем существование email
 
-if ($result->num_rows > 0) {
+$check = $conn->prepare("SELECT id FROM aregistr WHERE email=?");
+$check->bind_param("s", $email);
+$check->execute();
+
+if ($check->get_result()->num_rows > 0) {
+
     echo json_encode([
         "success" => false,
-        "message" => "Пользователь с таким E-mail уже существует"
+        "message" => "Пользователь с таким Email уже существует."
     ]);
+
     exit;
 }
 
-// Шифруем пароль
 $hash = password_hash($password, PASSWORD_DEFAULT);
 
-// Добавляем пользователя
-$stmt = $conn->prepare("
+$role = "user";
+
+$sql = $conn->prepare("
 INSERT INTO aregistr
-(name, secondname, phone, email, password)
-VALUES (?, ?, ?, ?, ?)
+(name, secondname, phone, email, password, Role)
+VALUES
+(?,?,?,?,?,?)
 ");
 
-$stmt->bind_param(
-    "sssss",
+$sql->bind_param(
+    "ssssss",
     $name,
     $secondname,
     $phone,
     $email,
-    $hash
+    $hash,
+    $role
 );
 
-if ($stmt->execute()) {
+if ($sql->execute()) {
+
     echo json_encode([
-        "success" => true
+        "success" => true,
+        "message" => "Регистрация успешна."
     ]);
+
 } else {
+
     echo json_encode([
         "success" => false,
-        "message" => "Ошибка регистрации"
+        "message" => "Ошибка регистрации."
     ]);
-}
 
-$stmt->close();
-$conn->close();
+}
