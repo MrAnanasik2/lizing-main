@@ -91,7 +91,7 @@
 
       /* ============================================================*/
          try {
-           const response = await fetch('https://lolek.beget.com/phpMyAdmin/sql.php?server=1&db=tompsons_stud01&table=aregistr&pos=0', {
+           const response = await fetch("register.php", {
              method: 'POST',
              headers: { 'Content-Type': 'application/json' },
              body: JSON.stringify(client)
