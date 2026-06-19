@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RED LEASING — Лизинг автомобилей и спецтехники</title>
+<style>
+  /* ===== БАЗОВЫЕ СТИЛИ (красно-чёрная тема) ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --black: #0d0d0d;
+    --dark: #1a1a1a;
+    --red: #e10600;
+    --red-dark: #b00500;
+    --gray: #8a8a8a;
+    --white: #f5f5f5;
+  }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.5;
+  }
+  a { text-decoration: none; color: inherit; }
+
+  /* ===== ШАПКА ===== */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background: var(--dark);
+    border-bottom: 2px solid var(--red);
+  }
+  .logo {
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 2px;
+  }
+  .logo span { color: var(--red); }
+  nav a {
+    margin-left: 24px;
+    font-size: 15px;
+    color: var(--white);
+  }
+  nav a:hover { color: var(--red); }
+
+  /* ===== ГЛАВНЫЙ ЭКРАН ===== */
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 40px;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .hero-text { flex: 1 1 360px; }
+  .hero-text h1 {
+    font-size: 52px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .hero-text h1 span { color: var(--red); }
+  .hero-text p {
+    color: var(--gray);
+    font-size: 18px;
+    margin-bottom: 32px;
+    max-width: 460px;
+  }
+  .hero-img {
+    flex: 1 1 420px;
+    text-align: center;
+  }
+  .hero-img img {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+
+  /* Главная кнопка "Взять лизинг" */
+  .btn-main {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    padding: 16px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-main:hover { background: var(--red-dark); }
+
+  /* === ТЕСТОВАЯ КНОПКА 1: при наведении появляется небольшая полоска === 
+  .btn-test1 {
+    position: relative;
+    background: var(--dark);
+    color: var(--white);
+    border: 1px solid #333;
+    padding: 16px 40px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .btn-test1::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 8px;
+    width: 0;
+    height: 3px;
+    background: var(--red);
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+  .btn-test1:hover::after {
+    width: 60%;
+    left: 20%;
+  }
+ */
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">RED<span>LEASING</span></div>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="login.html">Вход</a>
+      <a href="register.html">Регистрация</a>
+    </nav>
+  </header>
+
+  <!-- ===== ГЛАВНЫЙ ЭКРАН ===== -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>RED<span>LEASING</span><br>лизинг авто и спецтехники</h1>
+      <p>Оформите лизинг легкового авто, грузовика, внедорожника, фуры с прицепом или спецтехники быстро и без переплат.</p>
+      <a href="catalog.html" class="btn-main">Взять лизинг</a>
+    </div>
+    <div class="hero-img">
+      <img src="cars/hero.png" alt="Премиальный автомобиль">
+    </div>
+  </section>
+
+  <!-- ===== ТЕСТОВЫЕ КНОПКИ (выберите, какая лучше) =====
+  <section class="test-section">
+    <h2>Тестовые кнопки</h2>
+    <p class="hint">Ниже 3 варианта анимации кнопок — выберите подходящий и оставьте только нужный.</p>
+    <div class="test-buttons">
+
+      /* ТЕСТОВАЯ КНОПКА №1
+      <div class="test-card">
+        <button class="btn-test1">Узнать условия</button>
+        <span class="label">Тест №1 — полоска при наведении</span>
+      </div> 
+
+
+    </div>
+  </section> -->
+
+  <footer>
+    © 2026 RED LEASING. Все права защищены.
+  </footer>
+
+</body>
+</html>

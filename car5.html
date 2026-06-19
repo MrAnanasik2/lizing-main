@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>МТЗ Беларус 1221 — RED LEASING</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --black:#0d0d0d; --dark:#1a1a1a; --red:#e10600; --red-dark:#b00500; --gray:#8a8a8a; --white:#f5f5f5; --green:#22b14c; }
+  body { font-family: Arial, Helvetica, sans-serif; background: var(--black); color: var(--white); }
+  a { text-decoration:none; color:inherit; }
+  header { display:flex; align-items:center; justify-content:space-between; padding:20px 40px; background:var(--dark); border-bottom:2px solid var(--red); }
+  .logo { font-size:26px; font-weight:bold; letter-spacing:2px; }
+  .logo span { color:var(--red); }
+  nav a { margin-left:24px; font-size:15px; }
+  nav a:hover { color:var(--red); }
+  .container { max-width:1100px; margin:0 auto; padding:40px; }
+  .breadcrumb { color:var(--gray); font-size:14px; margin-bottom:20px; }
+  .breadcrumb a:hover { color:var(--red); }
+  .top { display:flex; flex-wrap:wrap; gap:40px; }
+  .left { flex:1 1 480px; }
+  .left h1 { font-size:30px; margin-bottom:8px; }
+  .subtitle { color:var(--gray); margin-bottom:20px; }
+  .main-img { width:100%; border-radius:12px; background:#fff; }
+  .stock { display:inline-block; margin-top:14px; font-size:14px; padding:6px 14px; border-radius:6px; }
+  .stock.in { background:rgba(34,177,76,.15); color:var(--green); }
+  .stock.out { background:rgba(225,6,0,.15); color:var(--red); }
+  .calc { flex:1 1 320px; background:var(--dark); border:1px solid #2a2a2a; border-radius:12px; padding:24px; height:fit-content; }
+  .calc .big-price { font-size:28px; font-weight:bold; margin-bottom:6px; }
+  .badge { display:inline-block; background:rgba(34,177,76,.15); color:var(--green); font-size:12px; padding:4px 10px; border-radius:4px; margin-bottom:20px; }
+  .calc label { display:block; font-size:13px; color:var(--gray); margin:16px 0 6px; }
+  .calc .val { font-weight:bold; font-size:16px; margin-bottom:6px; }
+  .calc input[type=range] { width:100%; accent-color:var(--red); }
+  .row { display:flex; justify-content:space-between; font-size:12px; color:var(--gray); }
+  .summary { margin-top:20px; border-top:1px solid #2a2a2a; padding-top:16px; }
+  .summary div { display:flex; justify-content:space-between; margin-bottom:8px; font-size:14px; }
+  .summary .accent { color:var(--white); font-weight:bold; font-size:18px; }
+  .btn-red { width:100%; background:var(--red); color:#fff; border:none; padding:14px; border-radius:6px; font-size:16px; font-weight:bold; cursor:pointer; margin-top:16px; }
+  .btn-red:hover { background:var(--red-dark); }
+  .btn-out { width:100%; background:transparent; color:var(--white); border:1px solid #444; padding:14px; border-radius:6px; font-size:15px; cursor:pointer; margin-top:10px; }
+  .btn-out:hover { border-color:var(--red); }
+  .specs-block { margin-top:50px; }
+  .specs-block h2 { margin-bottom:20px; }
+  .specs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:18px; }
+  .spec-item { background:var(--dark); border:1px solid #2a2a2a; border-radius:8px; padding:14px 16px; }
+  .spec-item .k { color:var(--gray); font-size:13px; }
+  .spec-item .v { font-weight:bold; margin-top:2px; }
+  .desc { margin-top:40px; color:#ccc; line-height:1.7; }
+  .desc h2 { color:var(--white); margin-bottom:12px; }
+  footer { text-align:center; padding:30px; color:var(--gray); border-top:1px solid #2a2a2a; margin-top:50px; }
+</style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">RED<span>LEASING</span></a>
+    <nav>
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="login.html">Вход</a>
+      <a href="register.html">Регистрация</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="breadcrumb"><a href="catalog.html">Каталог</a> / МТЗ Беларус 1221</div>
+    <div class="top">
+      <div class="left">
+        <h1>МТЗ Беларус 1221 трактор в лизинг</h1>
+        <p class="subtitle">Дизельный 7 л, 130 л.с., механика, полный привод, спецтехника · Новый</p>
+        <img src="cars/special.png" alt="МТЗ Беларус 1221" class="main-img">
+        <span class="stock in">В наличии: 3 шт. · Санкт-Петербург</span>
+      </div>
+      <div class="calc">
+        <div class="big-price">4 100 000 ₽</div>
+        <span class="badge">Онлайн-оформление</span>
+        <label>Аванс</label>
+        <div class="val" id="advanceVal">1 200 000 ₽</div>
+        <input type="range" id="advance" min="410000" max="2050000" step="10000" value="1200000">
+        <div class="row"><span>410 тыс</span><span>2 млн</span></div>
+        <label>Срок лизинга</label>
+        <div class="val" id="termVal">36 месяца</div>
+        <input type="range" id="term" min="12" max="59" step="1" value="36">
+        <div class="row"><span>12 мес.</span><span>59 мес.</span></div>
+        <div class="summary">
+          <div><span>Платёж</span><span class="accent" id="payment">— ₽/мес.</span></div>
+          <div><span>Сумма договора</span><span id="total">— ₽</span></div>
+        </div>
+        <button class="btn-red">Оставить заявку</button>
+        <button class="btn-out">Получить консультацию</button>
+      </div>
+    </div>
+
+    <div class="specs-block">
+      <h2>Характеристики</h2>
+      <div class="specs-grid">
+        <div class="spec-item"><div class="k">Двигатель</div><div class="v">Дизельный, 7 л, 130 л.с.</div></div>
+        <div class="spec-item"><div class="k">Коробка</div><div class="v">Механика</div></div>
+        <div class="spec-item"><div class="k">Привод</div><div class="v">Полный (4x4)</div></div>
+        <div class="spec-item"><div class="k">Тип</div><div class="v">Спецтехника (трактор)</div></div>
+        <div class="spec-item"><div class="k">Год выпуска</div><div class="v">2024</div></div>
+        <div class="spec-item"><div class="k">Грузоподъёмность навески</div><div class="v">до 5 т</div></div>
+        <div class="spec-item"><div class="k">Расход</div><div class="v">12 л/час</div></div>
+        <div class="spec-item"><div class="k">Цвет</div><div class="v">Жёлтый</div></div>
+      </div>
+    </div>
+
+    <div class="desc">
+      <h2>Описание</h2>
+      <p>МТЗ Беларус 1221 — универсальный трактор для сельхозработ, коммунального хозяйства и строительства. Совместим с широким набором навесного оборудования (погрузчик, ковш, отвал). Доступен в лизинг для агробизнеса и предприятий.</p>
+    </div>
+  </div>
+
+  <footer>© 2026 RED LEASING. Все права защищены.</footer>
+
+  <script>
+    const carPrice = 4100000;
+    const advance = document.getElementById('advance');
+    const term = document.getElementById('term');
+    const advanceVal = document.getElementById('advanceVal');
+    const termVal = document.getElementById('termVal');
+    const payment = document.getElementById('payment');
+    const total = document.getElementById('total');
+    function fmt(n){ return Math.round(n).toLocaleString('ru-RU') + ' ₽'; }
+    function calc(){
+      const adv=+advance.value, months=+term.value, rate=0.045;
+      const body=carPrice-adv, totalSum=body*(1+rate), monthly=totalSum/months;
+      advanceVal.textContent=fmt(adv); termVal.textContent=months+' месяца';
+      payment.textContent=fmt(monthly)+'/мес.'; total.textContent=fmt(totalSum+adv);
+    }
+    advance.addEventListener('input',calc); term.addEventListener('input',calc); calc();
+  </script>
+</body>
+</html>
